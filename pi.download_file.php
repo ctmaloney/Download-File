@@ -64,7 +64,9 @@ $file = unserialize(base64_decode($msg));
 
 
 $data = file_get_contents($_SERVER['DOCUMENT_ROOT'] . $file);
-$name = str_replace($remove_path,$prepend,$file);
+
+if($remove_path=="yes") $name = basename($file);
+else $name = str_replace($remove_path,$prepend,$file);
 
 if ($restricted != ""){
 if (stristr($_SERVER['HTTP_REFERER'], $restricted)) force_download($name, $data);
